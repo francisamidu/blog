@@ -13,8 +13,8 @@ export default function Blog({ posts }: BlogProps) {
       <Head>
         <title>Francis Amidu{`'`}s blog</title>
       </Head>
-      <main>
-        <div className="p-7 w-full min-h-[500px] max-w-screen-lg md:mx-auto">
+      <main className="bg-gray-100">
+        <div className="p-7 w-full min-h-[500px] max-w-screen-lg md:mx-auto bg-white">
           <h1 className="font-bold text-4xl text-new-100">
             Welcome to my blog
           </h1>
