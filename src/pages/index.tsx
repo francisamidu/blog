@@ -14,12 +14,12 @@ export default function Blog({ posts }: BlogProps) {
         <title>Francis Amidu{`'`}s blog</title>
       </Head>
       <main>
-        <div className="p-4 w-full min-h-[500px]">
-          <h1 className="font-bold text-2xl text-new-100">
+        <div className="p-7 w-full min-h-[500px] max-w-screen-lg md:mx-auto">
+          <h1 className="font-bold text-4xl text-new-100">
             Welcome to my blog
           </h1>
-          <p className="text-new-200 my-4">
-            Here i detail my juorney as a software engineer. I write about the
+          <p className="text-new-200 text-2xl my-4">
+            Here i detail my journey as a software engineer. I write about the
             projects i{`'`}ve worked on, the bugs i have encountered and solved
             and everything i learned.
           </p>
