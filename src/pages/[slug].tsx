@@ -17,15 +17,11 @@ import { Tag } from "../components";
 type BlogPostProps = {
   post: {
     frontmatter: TBlogCard;
-    source: {
-      compiledSource: string;
-      scope: {};
-    };
+    source: any;
   };
 };
-const ImageElement: any = Image;
 const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
-  const { excerpt, publishedAt, title, tags: tag } = frontmatter;
+  const { publishedAt, title, readingTime, tags: tag } = frontmatter;
   const tags = tag.split(",");
   return (
     <>
@@ -38,17 +34,20 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
             {title}
           </h1>
           <span className="text-new-200 mt-4">
-            {dayjs(publishedAt).format("DD MMMM YYYY")}
+            {`Published ${dayjs(publishedAt).format(
+              "DD MMMM YYYY"
+            )} - ${readingTime}`}
           </span>
         </div>
-        <div className="max-w-screen-lg md:mx-auto mt-4">
+        <div className="max-w-screen-md md:mx-auto mt-4 py-3">
           <div className="flex flex-row items-center">
             {tags.map((tag) => (
               <Tag tag={tag} key={tag} />
             ))}
           </div>
+          <p></p>
           <div className="content">
-            <MDXRemote {...source} components={{ ImageElement }} />
+            <MDXRemote {...source} components={{ Image }} />
           </div>
         </div>
       </main>

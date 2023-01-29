@@ -5,5 +5,6 @@ type BlogCard = {
   cover_image: string;
   slug: string;
   tags: string;
+  readingTime: string;
 };
 export default BlogCard;
