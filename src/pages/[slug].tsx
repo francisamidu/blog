@@ -12,6 +12,7 @@ import { getSlug, getArticleFromSlug } from "../utils/mdx";
 import "highlight.js/styles/atom-one-dark-reasonable.css";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { TBlogCard } from "../types";
+import { Tag } from "../components";
 
 type BlogPostProps = {
   post: {
@@ -24,21 +25,31 @@ type BlogPostProps = {
 };
 const ImageElement: any = Image;
 const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
-  const { excerpt, publishedAt, title } = frontmatter;
+  const { excerpt, publishedAt, title, tags: tag } = frontmatter;
+  const tags = tag.split(",");
   return (
     <>
       <Head>
         <title>{frontmatter.title} | My blog</title>
       </Head>
       <main className="">
-        <div className="min-h-screen flex flex-col justify-center items-center">
-          <h1 className="font-bold text-3xl text-center">{title}</h1>
-          <span className="text-new-200">
+        <div className="min-h-[95vh] flex flex-col justify-center items-center">
+          <h1 className="font-bold text-5xl text-center w-2/3 mx-auto">
+            {title}
+          </h1>
+          <span className="text-new-200 mt-4">
             {dayjs(publishedAt).format("DD MMMM YYYY")}
           </span>
         </div>
-        <div className="content">
-          <MDXRemote {...source} components={{ ImageElement }} />
+        <div className="max-w-screen-lg md:mx-auto mt-4">
+          <div className="flex flex-row items-center">
+            {tags.map((tag) => (
+              <Tag tag={tag} key={tag} />
+            ))}
+          </div>
+          <div className="content">
+            <MDXRemote {...source} components={{ ImageElement }} />
+          </div>
         </div>
       </main>
     </>
