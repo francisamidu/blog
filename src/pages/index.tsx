@@ -27,7 +27,7 @@ export default function Blog({ posts }: BlogProps) {
           </div>
         </div>
         <div className="py-5">
-          <h2 className="uppercase text-xs font-bold text-new-300 mb-4">
+          <h2 className="uppercase text-xs font-bold text-[#c41c7e] mb-4">
             Recently published
           </h2>
           {posts.map((frontmatter) => (
