@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { getAllArticles } from "../utils/mdx";
-import { BlogCard } from "../components";
+import { BlogCard, Heading } from "../components";
 import { TBlogCard } from "../types";
 
 type BlogProps = {
@@ -28,12 +28,13 @@ export default function Blog({ posts }: BlogProps) {
         </div>
         <div className="py-5 main-content">
           <div className="col-start-1 col-end-2">
-            <h2 className="uppercase text-xs font-bold text-new-400 mb-4">
-              Recently published
-            </h2>
+            <Heading heading="Recently Published" />
             {posts.map((frontmatter) => (
               <BlogCard key={frontmatter.slug} data={frontmatter} />
             ))}
+          </div>
+          <div className="col-start-2 col-end-3">
+            <Heading heading="Top Categories" />
           </div>
         </div>
       </main>
