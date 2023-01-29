@@ -53,12 +53,12 @@ const Blog = ({ posts }: BlogProps) => {
                 ))}
               </div>
             </div>
-            <div>
+            <div className="mt-6">
               <Heading heading="Popular Reads" />
               <div className="flex flex-col">
-                {allPosts.map((post, index) => (
+                {allPosts.map((post) => (
                   <ArticleLink
-                    key={index}
+                    key={post.slug}
                     path={post.slug}
                     title={post.title}
                   />
