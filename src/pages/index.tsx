@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { getAllArticles } from "../utils/mdx";
-import { BlogCard, Heading, Tag } from "../components";
+import { ArticleLink, BlogCard, Heading, Tag } from "../components";
 import { TBlogCard } from "../types";
 
 type BlogProps = {
@@ -10,7 +10,7 @@ type BlogProps = {
 const Blog = ({ posts }: BlogProps) => {
   const [allPosts, setAllPosts] = useState<TBlogCard[]>([]);
   useEffect(() => {
-    setAllPosts(posts);
+    setAllPosts([...new Set(posts)]);
   }, [posts]);
   const tags = [...new Set(posts.map((post) => post.tags.split(",")))].flat(2);
   const filterPostsByTag = (tag: string) => {
@@ -45,11 +45,25 @@ const Blog = ({ posts }: BlogProps) => {
             ))}
           </div>
           <div className="col-start-2 col-end-3">
-            <Heading heading="Top Categories" />
-            <div className="flex flex-row items-center justify-start flex-wrap">
-              {tags.map((tag, index) => (
-                <Tag key={index} tag={tag} />
-              ))}
+            <div>
+              <Heading heading="Top Categories" />
+              <div className="flex flex-row items-center justify-start flex-wrap">
+                {tags.map((tag, index) => (
+                  <Tag key={index} tag={tag} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Heading heading="Popular Reads" />
+              <div className="flex flex-col">
+                {allPosts.map((post, index) => (
+                  <ArticleLink
+                    key={index}
+                    path={post.slug}
+                    title={post.title}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
