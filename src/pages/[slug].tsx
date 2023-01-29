@@ -28,7 +28,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
       <Head>
         <title>{frontmatter.title} | My blog</title>
       </Head>
-      <main className="">
+      <main>
         <div className="min-h-[95vh] flex flex-col justify-center items-center">
           <h1 className="font-bold text-5xl text-center w-2/3 mx-auto">
             {title}
@@ -46,7 +46,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
             ))}
           </div>
           <p></p>
-          <div className="content">
+          <div className="mdx-content">
             <MDXRemote {...source} components={{ Image }} />
           </div>
         </div>
