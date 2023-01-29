@@ -8,7 +8,12 @@ body {
   margin: 0;
   font-family: Inter, sans-serif;
 }
-
+h1,
+h2,
+h3,
+h4 {
+  @apply text-new-100;
+}
 a {
   color: inherit;
   text-decoration: none;

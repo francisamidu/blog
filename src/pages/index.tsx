@@ -13,12 +13,12 @@ export default function Blog({ posts }: BlogProps) {
       <Head>
         <title>Francis Amidu{`'`}s blog</title>
       </Head>
-      <main className="bg-gray-100">
-        <div className="p-10 w-full max-w-screen-lg md:mx-auto bg-white">
+      <main className="bg-gray-100 max-w-screen-lg md:mx-auto">
+        <div className="p-10 w-full bg-white">
           <h1 className="font-bold text-4xl text-new-100">
             Welcome to my blog
           </h1>
-          <p className="text-new-200 text-2xl my-4">
+          <p className="text-new-200 text-2xl font-light my-4">
             Here i detail my journey as a software engineer. I write about the
             projects i{`'`}ve worked on, the bugs i have encountered and solved
             and everything i learned.
