@@ -2,12 +2,13 @@ import React from "react";
 import { TBlogCard } from "../types";
 import { Tag } from ".";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 type BlogCardProps = {
   data: TBlogCard;
 };
 const BlogCard = ({
-  data: { cover_image, excerpt, publishedAt, title, tags },
+  data: { excerpt, publishedAt, title, slug, tags },
 }: BlogCardProps) => {
   const newTags = tags.split(",");
   return (
@@ -24,9 +25,11 @@ const BlogCard = ({
           <Tag key={index} tag={tag} />
         ))}
       </div>
-      <p className="my-4 text-new-100 hover:cursor-pointer hover:text-new-400 transition-all duration-200">
-        Read more
-      </p>
+      <Link href={slug}>
+        <span className="my-4 text-new-100 hover:cursor-pointer hover:text-new-400 transition-all duration-200 w-fit">
+          Read more
+        </span>
+      </Link>
     </div>
   );
 };
