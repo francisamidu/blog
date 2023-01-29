@@ -15,7 +15,7 @@ export default function Blog({ posts }: BlogProps) {
       </Head>
       <main className="bg-white max-w-screen-lg md:mx-auto">
         <div className="border-b border-b-gray-100">
-          <div className="p-10 w-full">
+          <div className="py-10 w-full">
             <h1 className="font-bold text-4xl text-new-100">
               Welcome to my blog
             </h1>
@@ -26,8 +26,8 @@ export default function Blog({ posts }: BlogProps) {
             </p>
           </div>
         </div>
-        <div className="p-2">
-          <h2 className="uppercase text-xs font-bold text-new-300">
+        <div className="py-5">
+          <h2 className="uppercase text-xs font-bold text-new-300 mb-4">
             Recently published
           </h2>
           {posts.map((frontmatter) => (
