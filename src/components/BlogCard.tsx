@@ -1,6 +1,7 @@
 import React from "react";
 import { TBlogCard } from "../types";
 import { Tag } from ".";
+import dayjs from "dayjs";
 
 type BlogCardProps = {
   data: TBlogCard;
@@ -12,6 +13,9 @@ const BlogCard = ({
   return (
     <div className="py-4 rounded-md bg-white max-w-[550px]">
       <h1 className="font-bold text-xl capitalize">{title}</h1>
+      <span className="text-gray-500 text-sm">
+        Posted on {dayjs(publishedAt).format("MMM DD")}
+      </span>
       <p className="my-4 text-new-200">
         {excerpt.length > 175 ? `${excerpt.slice(0, 175)}....` : excerpt}
       </p>
