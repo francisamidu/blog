@@ -24,27 +24,27 @@ const Blog = ({ posts }: BlogProps) => {
       <Head>
         <title>Francis Amidu{`'`}s blog</title>
       </Head>
-      <main className="bg-white max-w-screen-lg md:mx-auto">
+      <main className="bg-white md:px-0 px-5 max-w-screen-lg mx-auto">
         <div className="border-b border-b-gray-100">
           <div className="py-10 w-full">
-            <h1 className="font-bold text-4xl text-new-100">
+            <h1 className="font-bold text-4xl text-new-100 text-center md:text-left">
               Welcome to my blog
             </h1>
-            <p className="text-new-200 text-2xl font-light my-4">
+            <p className="text-new-200 text-2xl font-light my-4 text-center md:text-left">
               Here i detail my journey as a software engineer. I write about the
               projects i{`'`}ve worked on, the bugs i have encountered and
               solved and everything i learned.
             </p>
           </div>
         </div>
-        <div className="py-5 main-content">
+        <div className="py-5 main-content sm:text-inherit">
           <div className="col-start-1 col-end-2">
             <Heading heading="Recently Published" />
             {allPosts.map((frontmatter) => (
               <BlogCard key={frontmatter.slug} data={frontmatter} />
             ))}
           </div>
-          <div className="col-start-2 col-end-3">
+          <div className="md:col-start-2 md:col-end-3 sm:col-start-1 sm:col-end-2">
             <div>
               <Heading heading="Top Categories" />
               <div className="flex flex-row items-center justify-start flex-wrap">
