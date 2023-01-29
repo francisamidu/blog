@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { getAllArticles } from "../utils/mdx";
-import { BlogCard, Heading } from "../components";
+import { BlogCard, Heading, Tag } from "../components";
 import { TBlogCard } from "../types";
 
 type BlogProps = {
   posts: TBlogCard[];
 };
-export default function Blog({ posts }: BlogProps) {
+const Blog = ({ posts }: BlogProps) => {
+  const [allPosts, setAllPosts] = useState<TBlogCard[]>([]);
+  useEffect(() => {
+    setAllPosts(posts);
+  }, [posts]);
+  const tags = [...new Set(posts.map((post) => post.tags.split(",")))].flat(2);
+  const filterPostsByTag = (tag: string) => {
+    const filteredPosts = posts.filter((post) =>
+      post.tags.toLowerCase().includes(tag.toLowerCase())
+    );
+    setAllPosts(filteredPosts);
+  };
   return (
     <>
       <Head>
@@ -29,20 +40,25 @@ export default function Blog({ posts }: BlogProps) {
         <div className="py-5 main-content">
           <div className="col-start-1 col-end-2">
             <Heading heading="Recently Published" />
-            {posts.map((frontmatter) => (
+            {allPosts.map((frontmatter) => (
               <BlogCard key={frontmatter.slug} data={frontmatter} />
             ))}
           </div>
           <div className="col-start-2 col-end-3">
             <Heading heading="Top Categories" />
+            <div className="flex flex-row items-center justify-start flex-wrap">
+              {tags.map((tag, index) => (
+                <Tag key={index} tag={tag} />
+              ))}
+            </div>
           </div>
         </div>
       </main>
     </>
   );
-}
+};
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   let articles = await getAllArticles();
 
   const sortedArticles = articles.map((article) => article);
@@ -58,4 +74,6 @@ export async function getStaticProps() {
       posts: sortedArticles,
     },
   };
-}
+};
+
+export default Blog;
