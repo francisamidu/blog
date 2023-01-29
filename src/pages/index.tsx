@@ -26,13 +26,15 @@ export default function Blog({ posts }: BlogProps) {
             </p>
           </div>
         </div>
-        <div className="py-5">
-          <h2 className="uppercase text-xs font-bold text-[#c41c7e] mb-4">
-            Recently published
-          </h2>
-          {posts.map((frontmatter) => (
-            <BlogCard key={frontmatter.slug} data={frontmatter} />
-          ))}
+        <div className="py-5 main-content">
+          <div className="col-start-1 col-end-2">
+            <h2 className="uppercase text-xs font-bold text-new-400 mb-4">
+              Recently published
+            </h2>
+            {posts.map((frontmatter) => (
+              <BlogCard key={frontmatter.slug} data={frontmatter} />
+            ))}
+          </div>
         </div>
       </main>
     </>
