@@ -87,7 +87,7 @@ export const getStaticProps = async ({ params }) => {
 };
 
 // dynamically generate the slugs for each article(s)
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   // getting all paths of each article as an array of
   // objects with their unique slugs
   const paths = (await getSlug()).map((slug) => ({ params: { slug } }));
@@ -97,4 +97,4 @@ export async function getStaticPaths() {
     // that does not exist. it'll return a 404 page
     fallback: false,
   };
-}
+};

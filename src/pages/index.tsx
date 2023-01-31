@@ -78,9 +78,9 @@ export const getStaticProps = async () => {
   const sortedArticles = articles.map((article) => article);
 
   sortedArticles.sort((a, b) => {
-    return (
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    );
+    return new Date(a.publishedAt).getTime() < new Date(b.publishedAt).getTime()
+      ? 1
+      : -1;
   });
 
   return {
