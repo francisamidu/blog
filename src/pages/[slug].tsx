@@ -13,6 +13,8 @@ import "highlight.js/styles/atom-one-dark-reasonable.css";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { TBlogCard } from "../types";
 import { Tag } from "../components";
+import { ArrowLeftCircle } from "lucide-react";
+import { useRouter } from "next/router";
 
 type BlogPostProps = {
   post: {
@@ -23,13 +25,22 @@ type BlogPostProps = {
 const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
   const { publishedAt, title, readingTime, tags: tag } = frontmatter;
   const tags = tag.split(",");
+  const router = useRouter();
+  const backToHome = () => {
+    router.back();
+  };
   return (
     <>
       <Head>
         <title>{frontmatter.title} | My blog</title>
       </Head>
       <main className="blog-item-content">
-        <div className="min-h-[94vh] flex flex-col justify-center items-center">
+        <div className="min-h-[94vh] flex flex-col justify-center items-center relative">
+          <ArrowLeftCircle
+            size={22}
+            className="text-new-100 absolute top-7 left-7 hover:cursor-pointer"
+            onClick={backToHome}
+          />
           <h1 className="font-bold text-5xl text-center w-2/3 mx-auto">
             {title}
           </h1>
