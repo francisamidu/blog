@@ -25,10 +25,11 @@ const BlogCard = ({
           <Tag key={index} tag={tag} />
         ))}
       </div>
-      <Link href={slug}>
-        <span className="my-4 text-new-100 hover:cursor-pointer hover:text-new-400 transition-all duration-200 w-fit">
-          Read more
-        </span>
+      <Link
+        href={slug}
+        className="my-4 text-new-100 hover:cursor-pointer hover:text-new-400 transition-all duration-200 w-fit"
+      >
+        Read more
       </Link>
     </div>
   );
