@@ -38,16 +38,15 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
               "DD MMMM YYYY"
             )} - ${readingTime}`}
           </span>
-        </div>
-        <div className="max-w-screen-md md:mx-auto mt-4 py-3">
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center justify-center my-5">
             {tags.map((tag) => (
               <Tag tag={tag} key={tag} />
             ))}
           </div>
-          <p></p>
-          <div className="mdx-content">
-            <MDXRemote {...source} components={{ Image }} />
+          <div className="max-w-screen-md md:mx-auto mt-4 py-3">
+            <div className="mdx-content">
+              <MDXRemote {...source} components={{ Image }} />
+            </div>
           </div>
         </div>
       </main>
