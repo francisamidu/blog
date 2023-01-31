@@ -29,7 +29,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
         <title>{frontmatter.title} | My blog</title>
       </Head>
       <main>
-        <div className="min-h-[95vh] flex flex-col justify-center items-center">
+        <div className="min-h-[90vh] flex flex-col justify-center items-center">
           <h1 className="font-bold text-5xl text-center w-2/3 mx-auto">
             {title}
           </h1>
@@ -43,11 +43,9 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
               <Tag tag={tag} key={tag} />
             ))}
           </div>
-          <div className="max-w-screen-md md:mx-auto mt-4 py-3">
-            <div className="mdx-content">
-              <MDXRemote {...source} components={{ Image }} />
-            </div>
-          </div>
+        </div>
+        <div className="max-w-screen-md md:mx-auto mt-4 py-3">
+          <MDXRemote {...source} components={{ Image }} />
         </div>
       </main>
     </>
