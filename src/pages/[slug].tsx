@@ -27,7 +27,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
   const tags = tag.split(",");
   const router = useRouter();
   const backToHome = () => {
-    router.back();
+    router.push("/");
   };
   return (
     <>
@@ -37,7 +37,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
       <main className="blog-item-content">
         <div className="min-h-[94vh] flex flex-col justify-center items-center relative">
           <ArrowLeftCircle
-            size={22}
+            size={25}
             className="text-new-100 absolute top-7 left-7 hover:cursor-pointer"
             onClick={backToHome}
           />
