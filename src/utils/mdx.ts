@@ -54,18 +54,17 @@ export async function getArticleFromSlug(slug) {
 export async function getAllArticles() {
   const articles = fs.readdirSync(articlesPath);
 
-  return articles.reduce((allArticles, articleSlug) => {
-    // get parsed data from mdx files in the "articles" dir
-    const source = fs.readFileSync(path.join(articlesPath), "utf-8");
-    const { data } = matter(source);
-
-    return [
-      {
-        ...data,
-        slug: articleSlug.replace(".mdx", ""),
-        readingTime: readingTime(source).text,
-      },
-      ...allArticles,
-    ];
-  }, []);
+  return articles
+    .map((article) => {
+      const source = fs.readFileSync(path.join(articlesPath, article));
+      const { data } = matter(source);
+      return [
+        {
+          ...data,
+          slug: article.replace(".mdx", ""),
+          readingTime: readingTime(String(source)).text,
+        },
+      ];
+    })
+    .flat(1);
 }
