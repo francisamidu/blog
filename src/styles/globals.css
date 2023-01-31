@@ -22,6 +22,10 @@ p,
 span {
   @apply text-slate-600;
 }
+
+.blog-item-content a {
+  @apply text-blue-600;
+}
 * {
   box-sizing: border-box;
 }
