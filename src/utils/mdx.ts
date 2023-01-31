@@ -3,6 +3,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { glob, sync } from "glob";
+import { TBlogCard } from "../types";
 
 const articlesPath = path.join(process.cwd(), "src/articles");
 
@@ -57,7 +58,7 @@ export async function getAllArticles() {
   return articles
     .map((article) => {
       const source = fs.readFileSync(path.join(articlesPath, article));
-      const { data } = matter(source);
+      const data = matter(source).data as TBlogCard;
       return [
         {
           ...data,
