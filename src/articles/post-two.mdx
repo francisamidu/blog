@@ -54,17 +54,20 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
-
 ```
 
 <br />
 <h1 className="font-bold text-2xl text-new-100">Issues with MDX</h1>
+<br />
 
 While working with MDX I came across some issues i ended up fixing and learning from.
 
 These are the bugs i encountered(created some myself):
 
-1. `[slug] page returning 404 when trying to access an article`. The issue here was that the individual page for an article was not generated properly. I changed the code for generating a new slug page to look like this:
+`[slug] page returning 404 when trying to access an article`. 
+
+The issue here was that the individual page for an article was not generated properly. I changed the code for generating a new slug page to look like this:
+
 ```jsx
 export async function getSlug() {
   const articles = fs.readdirSync(articlesPath);
@@ -94,8 +97,8 @@ export const getStaticPaths = async () => {
   };
 };
 ```
-2. `SyntaxError: unknown: Unterminated JSX contents. (23:16)`. This was an issue of unterminated element. I found that I has a `<br>` tag not closed. Solved it by terminating it like so:`<br />`;
-
+`SyntaxError: unknown: Unterminated JSX contents. (23:16)`. 
+This was an issue of unterminated element. I found that I has a `<br>` tag not closed. Solved it by terminating it like so:`<br />`;
 
 <br />
 <h1 className="font-bold text-2xl text-new-100">Conclusion</h1>
