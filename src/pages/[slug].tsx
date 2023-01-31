@@ -29,7 +29,7 @@ const BlogPost = ({ post: { frontmatter, source } }: BlogPostProps) => {
         <title>{frontmatter.title} | My blog</title>
       </Head>
       <main className="blog-item-content">
-        <div className="min-h-[90vh] flex flex-col justify-center items-center">
+        <div className="min-h-[94vh] flex flex-col justify-center items-center">
           <h1 className="font-bold text-5xl text-center w-2/3 mx-auto">
             {title}
           </h1>

@@ -2,24 +2,10 @@ import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { glob, sync } from "glob";
 import { TBlogCard } from "../types";
 
 const articlesPath = path.join(process.cwd(), "src/articles");
 
-// get unique article, when it is clicked on, by the user
-// on the blog page
-// function getSlug(slugPath: string) {
-//   const [slug] = /.+(?=.mdx)/i.exec(path.basename(slugPath)) as string[];
-//   return slug;
-// }
-// export function findAllPostSlugs() {
-//   const results = glob(path.join(articlesPath, '*.mdx'),() => {})
-//   results.minimatch.match()
-//   return .then((paths) =>
-//       paths.map(getSlug)
-//   );
-// }
 export async function getSlug() {
   const articles = fs.readdirSync(articlesPath);
 

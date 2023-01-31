@@ -1,19 +1,106 @@
 ---
-title: "Example post two"
+title: "How I built my own blog using MDX, TypeScript, Next.js and Tailwind"
 publishedAt: "2023-01-28"
-excerpt: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora a id numquam animi aliquid quae! Autem incidunt rem iure veniam pariatur possimus ratione consequatur iste? Magni consequuntur placeat est adipisci!"
+excerpt: "In this post I go over the process I underwent to build and published my own blog"
 cover_image: "path/to/where/image/is/stored"
-tags: "react,programming"
+tags: "blog,mdx"
 ---
 
-rest of the content falls here
+This article is inspired by <a href="https://leonardqmarcq.com/posts/how-to-build-your-own-blog-with-nextjs">Leonard Marc's article on why everyone should have a blog and how to build one in nextjs</a>. I won't go into much depth here so I recommend this read for more details. 
+
+<br />
+<h1 className="font-bold text-2xl text-new-100">Why even have my own blog</h1>
+<br />
+
+In my learning process I came across a lot of articles that recommended having your own blog as a Software Engineer. Building and publishing your own blog has always been a scary thing to me; I never felt I had enough knowledge to blog(or so i thought). After being motivated by some developers on twitter I finally decided to give it a chance and jump right in!
+
+<br />
+
+When it come to building blogs there are a lot of options on the market to choose from. WordPress, Gatsby, Contentful, Sanity are some of the CMS options you can consider. As for me i decided to settle for MDX and Next.js because I already knew Next and integrating with MDX(Markdown + JSX) is a breeze.
+
+<br />
+
+For working with MDX i choose to use <a href="https://github.com/hashicorp/next-mdx-remote">next-mdx-remote</a> as it allows mdx to be loaded within `getStaticProps` or `getServerSideProps` and hydrated correctly on the client. Working with MDX was a truly immersive experience; I learned a great deal about Markdown and SSG.
+
+For example, below is a snippet of code I wrote for getting an article from a slug
 
 ```jsx
-import React from "react";
+export const getStaticProps = async ({ params }) => {
+  const { slug } = params;
+  const { content, frontmatter } = await getArticleFromSlug(slug);
 
-const Hello = ({ text }) => {
-  return <h1>{text}</h1>;
+  const source = await serialize(content, {
+    mdxOptions: {
+      rehypePlugins: [
+        rehypeSlug as Pluggable<[Settings?], Settings>,
+        [
+          rehypeAutolinkHeadings as Plugin<[Settings?], Settings>,
+          {
+            properties: { className: ["anchor"] },
+          },
+        ],
+        rehypeHighlight as Pluggable<[Settings?], Settings>,
+        rehypeCodeTitles,
+      ],
+    },
+  });
+
+  return {
+    props: {
+      post: {
+        source,
+        frontmatter,
+      },
+    },
+  };
 };
 
-export default Hello;
 ```
+
+<br />
+<h1 className="font-bold text-2xl text-new-100">Issues with MDX</h1>
+
+While working with MDX I came across some issues i ended up fixing and learning from.
+
+These are the bugs i encountered(created some myself):
+
+- `[slug] page returning 404 when trying to access an article`. The issue here was that the individual page for an article was not generated properly. I changed the code for generating a new slug page to look like this:
+```jsx
+export async function getSlug() {
+  const articles = fs.readdirSync(articlesPath);
+
+  return articles.map((path) => {
+    // holds the paths to the directory of the article
+    const parts = path.split("/");
+    const fileName = parts[parts.length - 1]; // gets the last part of path with /name.mdx
+    const [slug, _extension] = fileName.split(".");
+
+    return slug;
+  });
+}
+```
+and for generating a path:
+```jsx
+// dynamically generate the slugs for each article(s)
+export const getStaticPaths = async () => {
+  // getting all paths of each article as an array of
+  // objects with their unique slugs
+  const paths = (await getSlug()).map((slug) => ({ params: { slug } }));
+  return {
+    paths,
+    // in situations where you try to access a path
+    // that does not exist. it'll return a 404 page
+    fallback: false,
+  };
+};
+```
+- `SyntaxError: unknown: Unterminated JSX contents. (23:16)`. This was an issue of unterminated element. I found that I has a `<br>` tag not closed. Solved it by terminating it like so:`<br />`;
+
+
+<br />
+<h1 className="font-bold text-2xl text-new-100">Conclusion</h1>
+<br />
+
+Building my own blog has taught me a lot of things including working with technologies like MDX and solving obscure bugs. I also had a chance to put to paper my thoughts, ideas, journey and overall what I have learned. I wish I started sooner but all is well that ends well. For new developers(or veterans) I recommend having your own blog. Even if you won't be writing technical content but writing your own thoughts and detailing your journey is more than enough. As a Software Engineer it allows you learn, grow and help other developers. So if you have not started yet go out there and build your own blog!
+
+<br/>
