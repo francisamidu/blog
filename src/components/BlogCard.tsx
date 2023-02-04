@@ -21,16 +21,18 @@ const BlogCard = ({
       <p className="my-4 text-new-200">
         {excerpt.length > 175 ? `${excerpt.slice(0, 175)}....` : excerpt}
       </p>
-      <div className="flex flex-row items-center justify-start">
+      <div className="flex flex-row items-center justify-start mb-10">
         {newTags.map((tag, index) => (
           <Tag key={index} tag={tag} />
         ))}
       </div>
-      <Link href={slug} className="my-4 w-fit">
-        <span className="text-[#040e25] hover:cursor-pointer hover:text-new-400 transition-all duration-200">
-          Read more
-        </span>
-        <ArrowRightIcon color="#040e25" size={20} />
+      <Link href={slug}>
+        <div className="w-fit flex flex-row items-center hover:cursor-pointer">
+          <span className="text-[#040e25] mr-2 transition-all duration-200">
+            Read more
+          </span>
+          <ArrowRightIcon color="#040e25" size={20} />
+        </div>
       </Link>
     </div>
   );
