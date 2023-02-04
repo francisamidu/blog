@@ -19,7 +19,7 @@ const BlogCard = ({
         Posted on {dayjs(publishedAt).format("MMM DD")}
       </span>
       <p className="my-4 text-new-200">
-        {excerpt.length > 175 ? `${excerpt.slice(0, 175)}....` : excerpt}
+        {excerpt.length > 175 ? `${excerpt.slice(0, 220)}....` : excerpt}
       </p>
       <div className="flex flex-row items-center justify-start mb-10">
         {newTags.map((tag, index) => (
