@@ -3,6 +3,7 @@ import { TBlogCard } from "../types";
 import { Tag } from ".";
 import dayjs from "dayjs";
 import Link from "next/link";
+import { ArrowRightIcon } from "lucide-react";
 
 type BlogCardProps = {
   data: TBlogCard;
@@ -25,11 +26,11 @@ const BlogCard = ({
           <Tag key={index} tag={tag} />
         ))}
       </div>
-      <Link
-        href={slug}
-        className="my-4 text-new-100 hover:cursor-pointer hover:text-new-400 transition-all duration-200 w-fit"
-      >
-        Read more
+      <Link href={slug} className="my-4 w-fit">
+        <span className="text-[#040e25] hover:cursor-pointer hover:text-new-400 transition-all duration-200">
+          Read more
+        </span>
+        <ArrowRightIcon color="#040e25" size={20} />
       </Link>
     </div>
   );
