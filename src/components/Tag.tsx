@@ -2,7 +2,7 @@ import React from "react";
 
 type TagProps = {
   tag: string;
-  onClick?: () => void;
+  onClick?: (tag: string | any) => void;
 };
 const Tag = ({ tag, onClick }: TagProps) => {
   const handleClick = onClick ? onClick : () => {};

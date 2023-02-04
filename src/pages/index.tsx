@@ -3,11 +3,13 @@ import Head from "next/head";
 import { getAllArticles } from "../utils/mdx";
 import { ArticleLink, BlogCard, Heading, Tag } from "../components";
 import { TBlogCard } from "../types";
+import { useRouter } from "next/router";
 
 type BlogProps = {
   posts: TBlogCard[];
 };
 const Blog = ({ posts }: BlogProps) => {
+  const router = useRouter();
   const [allPosts, setAllPosts] = useState<TBlogCard[]>([]);
   useEffect(() => {
     setAllPosts([...new Set(posts)]);
@@ -17,8 +19,21 @@ const Blog = ({ posts }: BlogProps) => {
     const filteredPosts = posts.filter((post) =>
       post.tags.toLowerCase().includes(tag.toLowerCase())
     );
-    setAllPosts(filteredPosts);
+    if (filteredPosts.length) {
+      setAllPosts(filteredPosts);
+    }
   };
+  const tagPost = (tag: string) => {
+    const baseURL = document.URL.split("?")[0];
+    const url = new URL(`${baseURL}?filterby=${tag}`);
+    router.push(`/?filterby=${tag}`);
+  };
+  useEffect(() => {
+    const filter = router.query["filterby"];
+    if (filter) {
+      filterPostsByTag(String(filter));
+    }
+  }, [router.query]);
   return (
     <>
       <Head>
@@ -49,7 +64,7 @@ const Blog = ({ posts }: BlogProps) => {
               <Heading heading="Top Categories" />
               <div className="flex flex-row items-center justify-start flex-wrap">
                 {tags.map((tag, index) => (
-                  <Tag key={index} tag={tag} />
+                  <Tag key={index} tag={tag} onClick={() => tagPost(tag)} />
                 ))}
               </div>
             </div>
