@@ -63,7 +63,7 @@ const Blog = ({ posts }: BlogProps) => {
             <div>
               <Heading heading="Top Categories" />
               <div className="flex flex-row items-center justify-start flex-wrap">
-                {tags.map((tag, index) => (
+                {[...tags, "Clear"].map((tag, index) => (
                   <Tag key={index} tag={tag} onClick={() => tagPost(tag)} />
                 ))}
               </div>
